@@ -28,6 +28,21 @@ a { color: inherit; }
   padding: 14px;
 }
 
+/* Minimal, Mandtra-style layout (no header / no footer) */
+.app-minimal {
+  grid-template-rows: 1fr;
+  gap: 0;
+}
+
+.top-right{
+  position:absolute;
+  top: 12px;
+  right: 12px;
+  display:flex;
+  gap: 8px;
+  z-index: 5;
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -119,7 +134,7 @@ a { color: inherit; }
 .page-indicator {
   position: absolute;
   top: 12px;
-  right: 12px;
+  left: 12px;
   padding: 8px 10px;
   border-radius: 12px;
   background: rgba(0,0,0,0.35);

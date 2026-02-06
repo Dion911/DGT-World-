@@ -1,4 +1,4 @@
-/* One Paragon PWA (build 9eac18817866) */
+/* One Paragon PWA (build 2026-02-06-minimal) */
 const PAGES = [
   "assets/pages/11.png",
   "assets/pages/12.png",

@@ -11,23 +11,16 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <div class="app">
-    <header class="header">
-      <div class="brand">
-        <img src="./assets/icons/icon-192.png" alt="App icon" />
-        <div class="title">
-          <h1>One Paragon • ID Enhancements</h1>
-          <p>Swipe • Arrow keys • Offline-ready</p>
-        </div>
-      </div>
-      <div class="actions">
+  <div class="app app-minimal">
+    <!-- Minimal, Mandtra-style: no header, no bottom bar. Just arrows + subtle utilities. -->
+    <main class="viewer" id="viewer">
+      <div class="hint" id="status" style="opacity:0"></div>
+
+      <div class="top-right">
         <button class="btn" id="btnInstall" type="button" hidden>Install</button>
         <button class="btn" id="btnFull" type="button">Fullscreen</button>
       </div>
-    </header>
 
-    <main class="viewer" id="viewer">
-      <div class="hint" id="status" style="opacity:0"></div>
       <div class="page-indicator" id="pageIndicator">1 / 0</div>
       <button class="nav" id="btnPrev" type="button" aria-label="Previous page">‹</button>
       <button class="nav nav-next" id="btnNext" type="button" aria-label="Next page">›</button>

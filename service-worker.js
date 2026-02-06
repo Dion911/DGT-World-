@@ -1,5 +1,5 @@
-/* One Paragon PWA Service Worker (build 9eac18817866) */
-const CACHE = 'one-paragon-9eac18817866';
+/* One Paragon PWA Service Worker (build 2026-02-06-minimal) */
+const CACHE = 'one-paragon-2026-02-06-minimal';
 const PRECACHE = [
   "./",
   "./index.html",
