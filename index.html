@@ -23,26 +23,18 @@
       <div class="actions">
         <button class="btn" id="btnInstall" type="button" hidden>Install</button>
         <button class="btn" id="btnFull" type="button">Fullscreen</button>
-        <button class="btn" id="btnPrev" type="button" aria-label="Previous">← Prev</button>
-        <button class="btn" id="btnNext" type="button" aria-label="Next">Next →</button>
       </div>
     </header>
 
     <main class="viewer" id="viewer">
       <div class="hint" id="status" style="opacity:0"></div>
+      <div class="page-indicator" id="pageIndicator">1 / 0</div>
+      <button class="nav" id="btnPrev" type="button" aria-label="Previous page">‹</button>
+      <button class="nav nav-next" id="btnNext" type="button" aria-label="Next page">›</button>
       <div class="canvas">
         <img class="page" id="pageImg" alt="Page" />
       </div>
     </main>
-
-    <footer class="footer">
-      <div class="progress">
-        <div>Page <b id="pageNo">1</b> / <b id="totalPages">0</b></div>
-        <div>Tip: swipe left/right</div>
-      </div>
-      <input class="scrub" id="slider" type="range" min="0" value="0" step="1" />
-      <div class="thumbs" id="thumbs" aria-label="Thumbnails"></div>
-    </footer>
   </div>
 
   <script src="./app.js"></script>

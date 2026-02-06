@@ -17,14 +17,11 @@ const PAGES = [
 
 const els = {
   img: document.getElementById('pageImg'),
-  pageNo: document.getElementById('pageNo'),
-  total: document.getElementById('totalPages'),
-  slider: document.getElementById('slider'),
+  indicator: document.getElementById('pageIndicator'),
   btnPrev: document.getElementById('btnPrev'),
   btnNext: document.getElementById('btnNext'),
   btnFull: document.getElementById('btnFull'),
   btnInstall: document.getElementById('btnInstall'),
-  thumbs: document.getElementById('thumbs'),
   status: document.getElementById('status'),
 };
 
@@ -38,22 +35,14 @@ function setStatus(text) {
   els.status.style.opacity = text ? '1' : '0';
 }
 
-function loadPage(i, {scrollThumb=true}={}) {
+function loadPage(i) {
   idx = clamp(i, 0, PAGES.length - 1);
   const src = PAGES[idx];
   els.img.src = src;
-  els.pageNo.textContent = String(idx + 1);
-  els.total.textContent = String(PAGES.length);
-  els.slider.value = String(idx);
+  els.indicator.textContent = `${idx + 1} / ${PAGES.length}`;
 
   els.btnPrev.disabled = idx === 0;
   els.btnNext.disabled = idx === PAGES.length - 1;
-
-  [...els.thumbs.children].forEach((t, k) => t.classList.toggle('active', k === idx));
-  if (scrollThumb) {
-    const active = els.thumbs.children[idx];
-    if (active) active.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
-  }
 
   history.replaceState(null, '', `#p=${idx+1}`);
 }
@@ -62,19 +51,6 @@ function parseHash() {
   const m = location.hash.match(/p=(\d+)/);
   if (!m) return 0;
   return clamp(parseInt(m[1],10)-1, 0, PAGES.length-1);
-}
-
-function makeThumbs() {
-  els.thumbs.innerHTML = '';
-  PAGES.forEach((src, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'thumb';
-    btn.type = 'button';
-    btn.title = `Page ${i+1}`;
-    btn.innerHTML = `<img loading="lazy" src="${src}" alt="Page ${i+1}"><span class="badge">${i+1}</span>`;
-    btn.addEventListener('click', () => loadPage(i));
-    els.thumbs.appendChild(btn);
-  });
 }
 
 function go(delta) {
@@ -94,7 +70,6 @@ function bind() {
   els.btnPrev.addEventListener('click', () => go(-1));
   els.btnNext.addEventListener('click', () => go(1));
   els.btnFull.addEventListener('click', toggleFullscreen);
-  els.slider.addEventListener('input', (e) => loadPage(parseInt(e.target.value,10), {scrollThumb:false}));
 
   // keyboard
   window.addEventListener('keydown', (e) => {
@@ -171,13 +146,10 @@ els.btnInstall.addEventListener('click', async () => {
   }
 });
 
-window.addEventListener('hashchange', () => loadPage(parseHash(), {scrollThumb:true}));
+window.addEventListener('hashchange', () => loadPage(parseHash()));
 
 (function init() {
-  els.total.textContent = String(PAGES.length);
-  els.slider.max = String(PAGES.length - 1);
-  makeThumbs();
   bind();
-  loadPage(parseHash(), {scrollThumb:false});
+  loadPage(parseHash());
   registerSW();
 })();
